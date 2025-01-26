@@ -220,6 +220,27 @@ body {
 // Hourly forecast
 .hourly-forecast {
   margin-top: 2rem;
+  background-color: white; // Match the Weather Result background
+  padding: 2rem; // Add padding for consistent spacing
+  margin-bottom: 30px;
+  border-radius: 8px; // Same border-radius as Weather Result
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Same box-shadow
+  border: 1px solid #ddd; // Match the Weather Result border
+
+  @include responsive(tablet) {
+    padding: 1.5rem;
+  }
+
+  @include responsive(mobile) {
+    padding: 1rem;
+  }
+
+  h2 {
+    margin-bottom: 1.5rem; // Add space between title and cards
+    color: $primary-color;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
   .hourly-cards {
     @include flex(row, space-between);
@@ -237,9 +258,10 @@ body {
       @include flex(column);
       min-width: 120px;
       padding: 1.5rem;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background-color: white; // Ensure consistent background color
+      border: 1px solid #ddd; // Match Weather Result border
+      border-radius: 8px; // Match Weather Result border-radius
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Consistent box-shadow
       transition: transform 0.2s ease-in-out;
 
       @include responsive(tablet) {
@@ -288,6 +310,7 @@ body {
     }
   }
 }
+
 
 // Favorites
 .favorites {

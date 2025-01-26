@@ -198,6 +198,28 @@ body {
 
 .hourly-forecast {
   margin-top: 2rem;
+  background-color: white;
+  padding: 2rem;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+@media (max-width: 768px) {
+  .hourly-forecast {
+    padding: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .hourly-forecast {
+    padding: 1rem;
+  }
+}
+.hourly-forecast h2 {
+  margin-bottom: 1.5rem;
+  color: rgb(27, 146, 162);
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 .hourly-forecast .hourly-cards {
   display: flex;
@@ -222,8 +244,9 @@ body {
   align-items: center;
   min-width: 120px;
   padding: 1.5rem;
-  border: 1px solid #eee;
-  border-radius: 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 }
