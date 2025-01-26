@@ -22,11 +22,21 @@
         .favorite-item .supprimer-btn {
             width: 100px;
         }
+
+        .city-unavailable {
+        display: none;
+        color: #f44336;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .city-unavailable.active {
+        display: block;
+    }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white header">
              <a href="index.html" class="a"> 
                 <h1>WeatherN<i class="fa-solid fa-sun" style="color: #FFD43B;"></i>w</h1> 
              </a>
@@ -45,7 +55,7 @@
             <div id="cityUnavailable" class="city-unavailable">
                 <p>Désolé, cette ville n'est pas disponible. Veuillez réessayer.</p>
             </div>
-        </header>
+        </nav>
 
         <main class="main-content">
           <div class="weather-sections">

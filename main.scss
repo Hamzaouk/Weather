@@ -1,0 +1,373 @@
+// Variables
+$primary-color: rgb(27, 146, 162);
+$secondary-color: #ffd700;
+$error-color: #f44336;
+$text-color: #333;
+$background-color: #f5f5f5;
+$btn-color: #fff;
+$text-decoration: none;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+
+// Mixins
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (max-width: $breakpoint-tablet) { @content; }
+  } @else if $breakpoint == mobile {
+    @media (max-width: $breakpoint-mobile) { @content; }
+  }
+}
+
+@mixin button-styles {
+  padding: 0.8rem 1.5rem;
+  background-color: $primary-color;
+  color: $btn-color;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+
+  @include responsive(tablet) {
+    padding: 15px;
+  }
+
+  @include responsive(mobile) {
+    padding: 10px;
+  }
+}
+
+// Header
+.header {
+  @include flex(column);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+    text-decoration: $text-decoration;
+    padding-bottom: 10px;
+    border-bottom: 2px solid $primary-color;
+
+    @include responsive(mobile) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .a{
+    text-decoration: $text-decoration;
+  }
+
+  .search-controls {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .search-box {
+    @include flex(row, space-between);
+    width: 100%;
+    gap: 1rem;
+
+    @include responsive(mobile) {
+      flex-direction: column;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 0.8rem;
+      border: 2px solid $primary-color;
+      border-radius: 4px;
+    }
+  }
+
+  .button-group {
+    @include flex(row, space-between);
+    width: 100%;
+    gap: 1rem;
+
+    @include responsive(mobile) {
+      flex-direction: column;
+    }
+  }
+
+  .btn {
+    @include button-styles;
+    white-space: nowrap;
+
+    @include responsive(mobile) {
+      width: 100%;
+    }
+  }
+}
+
+// Weather result
+.weather-result {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+
+  @include responsive(tablet) {
+    padding: 1.5rem;
+  }
+
+  @include responsive(mobile) {
+    padding: 1rem;
+  }
+
+  .weather-header {
+    @include flex(row, space-between, flex-start);
+    margin-bottom: 2rem;
+
+    @include responsive(tablet) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .weather-icon-temp {
+      @include flex(row, flex-start, center);
+      gap: 2rem;
+
+      @include responsive(tablet) {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .weather-icon {
+        width: 300px;
+        height: 300px;
+
+        @include responsive(tablet) {
+          width: 200px;
+          height: 200px;
+        }
+
+        @include responsive(mobile) {
+          width: 150px;
+          height: 150px;
+        }
+      }
+
+      .precipitation {
+        @include flex(column, center, flex-start);
+
+        .precipitation-percentage {
+          font-size: 1.5rem;
+          color: $primary-color;
+        }
+
+        .precipitation-label {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .temperature-section {
+      @include responsive(tablet) {
+        margin-top: 1rem;
+      }
+
+      .current-temperature {
+        font-size: 4rem;
+        color: $primary-color;
+        font-weight: bold;
+
+        @include responsive(mobile) {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+}
+
+// Hourly forecast
+.hourly-forecast {
+  margin-top: 2rem;
+
+  .hourly-cards {
+    @include flex(row, space-between);
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding: 1.5rem 0;
+    flex-wrap: wrap;
+
+    @include responsive(tablet) {
+      justify-content: flex-start;
+      padding-bottom: 1rem;
+    }
+
+    .hourly-card {
+      @include flex(column);
+      min-width: 120px;
+      padding: 1.5rem;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease-in-out;
+
+      @include responsive(tablet) {
+        min-width: 100px;
+      }
+
+      @include responsive(mobile) {
+        min-width: 80px;
+        padding: 0.75rem;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .hour {
+        margin-bottom: 0.75rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        @include responsive(mobile) {
+          font-size: 1rem;
+        }
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0.75rem;
+
+        @include responsive(mobile) {
+          width: 60px;
+          height: 60px;
+        }
+      }
+
+      .hourly-temp {
+        font-weight: bold;
+        color: $primary-color;
+        font-size: 1.5rem;
+
+        @include responsive(mobile) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+// Favorites
+.favorites {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  margin-bottom: 2rem;
+
+  @include responsive(tablet) {
+    padding: 1.5rem;
+  }
+
+  @include responsive(mobile) {
+    padding: 1rem;
+  }
+
+  .favorite-item {
+    @include flex(row, space-between, center);
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+
+    @include responsive(mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    button {
+      @include button-styles;
+      background-color: $error-color;
+
+      &:hover {
+        background-color: darken($error-color, 10%);
+      }
+    }
+  }
+}
+
+.btn-fav {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#fav {
+  font-size: 44px;
+  color: $secondary-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: darken($secondary-color, 10%);
+    font-size: 48px;
+  }
+}
+
+// Error message
+.error-message {
+  padding: 1rem;
+  color: white;
+  background-color: $error-color;
+  border-radius: 4px;
+  margin-top: 1rem;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Footer
+footer {
+  background-color: #333;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+
+  @include responsive(mobile) {
+    font-size: 0.9rem;
+    padding: 1.5rem 1rem;
+  }
+}
